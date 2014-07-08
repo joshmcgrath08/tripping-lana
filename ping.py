@@ -27,7 +27,7 @@ def add_to_history(host, val):
 def do_ping ():
     for h in hosts:
         try:
-            ping_resp = subprocess.check_output(['ping', '-c', '1', '-W', '1', h])
+            ping_resp = subprocess.check_output(['timeout', '2s', 'ping', '-c', '1', '-W', '1', h])
             non_empty_lines = filter(lambda x: len(x) > 0, string.split(ping_resp, '\n'))
             if len(non_empty_lines) == 0:
                 print 'Error, no non-empty lines in ping output'
