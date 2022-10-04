@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # adapted from http://matplotlib.org/examples/animation/simple_anim.html
 
 import numpy as np
@@ -11,8 +9,7 @@ import ping
 # Don't show toolbar
 plt.rcParams['toolbar'] = 'None'
 
-# Show 1" x 1" figure
-fig = plt.figure(figsize=(1,1))
+fig = plt.figure(figsize=(2,2), layout="constrained")
 
 index = np.arange(len(ping.hosts))
 bar_width = .75
@@ -20,10 +17,9 @@ y_max = 200
 
 rects = plt.bar(index, [1000] * len(ping.hosts), bar_width)
 
-plt.xticks([])
-plt.yticks([])
+plt.xticks(ticks=list(range(len(ping.hosts))), labels=ping.hosts, rotation=45)
 plt.ylim([0, y_max])
-plt.xlim([0, len(ping.hosts) - 1 + bar_width])
+plt.xlim([-bar_width, (len(ping.hosts) + 1) * bar_width])
 
 def animate(i):
     ping.do_ping()
